@@ -1,69 +1,47 @@
-## Illuminate Database
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-The Illuminate Database component is a full database toolkit for PHP, providing an expressive query builder, ActiveRecord style ORM, and schema builder. It currently supports MySQL, Postgres, SQL Server, and SQLite. It also serves as the database layer of the Laravel PHP framework.
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-### Usage Instructions
+## About Laravel
 
-First, create a new "Capsule" manager instance. Capsule aims to make configuring the library for usage outside of the Laravel framework as easy as possible.
+> **Note:** This repository contains the core code of the Laravel framework. If you want to build an application using Laravel, visit the main [Laravel repository](https://github.com/laravel/laravel).
 
-```PHP
-use Illuminate\Database\Capsule\Manager as Capsule;
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
 
-$capsule = new Capsule;
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-$capsule->addConnection([
-    'driver' => 'mysql',
-    'host' => 'localhost',
-    'database' => 'database',
-    'username' => 'root',
-    'password' => 'password',
-    'charset' => 'utf8',
-    'collation' => 'utf8_unicode_ci',
-    'prefix' => '',
-]);
+Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation gives you a complete toolset required to build any application with which you are tasked.
 
-// Set the event dispatcher used by Eloquent models... (optional)
-use Illuminate\Events\Dispatcher;
-use Illuminate\Container\Container;
-$capsule->setEventDispatcher(new Dispatcher(new Container));
+## Learning Laravel
 
-// Make this Capsule instance available globally via static methods... (optional)
-$capsule->setAsGlobal();
+Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is in-depth and complete, making it a breeze to get started learning the framework.
 
-// Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
-$capsule->bootEloquent();
-```
+You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-> `composer require "illuminate/events"` required when you need to use observers with Eloquent.
+If you're not in the mood to read, [Laracasts](https://laracasts.com) contains thousands of video tutorials covering a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
 
-Once the Capsule instance has been registered. You may use it like so:
+## Contributing
 
-**Using The Query Builder**
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-```PHP
-$users = Capsule::table('users')->where('votes', '>', 100)->get();
-```
-Other core methods may be accessed directly from the Capsule in the same manner as from the DB facade:
-```PHP
-$results = Capsule::select('select * from users where id = ?', [1]);
-```
+## Code of Conduct
 
-**Using The Schema Builder**
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-```PHP
-Capsule::schema()->create('users', function ($table) {
-    $table->increments('id');
-    $table->string('email')->unique();
-    $table->timestamps();
-});
-```
+## Security Vulnerabilities
 
-**Using The Eloquent ORM**
+Please review [our security policy](https://github.com/laravel/framework/security/policy) on how to report security vulnerabilities.
 
-```PHP
-class User extends Illuminate\Database\Eloquent\Model {}
+## License
 
-$users = User::where('votes', '>', 1)->get();
-```
-
-For further documentation on using the various database facilities this library provides, consult the [Laravel framework documentation](https://laravel.com/docs).
+The Laravel framework is open-sourced software licensed under the [MIT license](LICENSE.md).
