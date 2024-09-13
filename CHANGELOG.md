@@ -4,375 +4,409 @@ CHANGELOG
 7.1
 ---
 
- * Add optional `$expirationParameter` argument to `UriSigner::__construct()`
- * Add optional `$expiration` argument to `UriSigner::sign()`
- * Rename `$parameter` argument of `UriSigner::__construct()` to `$hashParameter`
- * Add `UploadedFile::getClientOriginalPath()`
- * Add `QueryParameterRequestMatcher`
- * Add `HeaderRequestMatcher`
- * Add support for `\SplTempFileObject` in `BinaryFileResponse`
- * Add `verbose` argument to response test constraints
+ * Add method `isKernelTerminating()` to `ExceptionEvent` that allows to check if an exception was thrown while the kernel is being terminated
+ * Add `HttpException::fromStatusCode()`
+ * Add `$validationFailedStatusCode` argument to `#[MapQueryParameter]` that allows setting a custom HTTP status code when validation fails
+ * Add `NearMissValueResolverException` to let value resolvers report when an argument could be under their watch but failed to be resolved
+ * Add `$type` argument to `#[MapRequestPayload]` that allows mapping a list of items
+ * The `Extension` class is marked as internal, extend the `Extension` class from the DependencyInjection component instead
+ * Deprecate `Extension::addAnnotatedClassesToCompile()`
+ * Deprecate `AddAnnotatedClassesToCachePass`
+ * Deprecate the `setAnnotatedClassCache()` and `getAnnotatedClassesToCompile()` methods of the `Kernel` class
+ * Add `#[MapUploadedFile]` attribute to fetch, validate, and inject uploaded files into controller arguments
 
 7.0
 ---
 
- * Calling `ParameterBag::filter()` throws an `UnexpectedValueException` on invalid value, unless flag `FILTER_NULL_ON_FAILURE` is set
- * Calling `ParameterBag::getInt()` and `ParameterBag::getBool()` throws an `UnexpectedValueException` on invalid value
- * Remove classes `RequestMatcher` and `ExpressionRequestMatcher`
- * Remove `Request::getContentType()`, use `Request::getContentTypeFormat()` instead
- * Throw an `InvalidArgumentException` when calling `Request::create()` with a malformed URI
- * Require explicit argument when calling `JsonResponse::setCallback()`, `Response::setExpires/setLastModified/setEtag()`, `MockArraySessionStorage/NativeSessionStorage::setMetadataBag()`, `NativeSessionStorage::setSaveHandler()`
- * Add argument `$statusCode` to `Response::sendHeaders()` and `StreamedResponse::sendHeaders()`
+ * Add argument `$reflector` to `ArgumentResolverInterface::getArguments()` and `ArgumentMetadataFactoryInterface::createArgumentMetadata()`
+ * Remove `ArgumentValueResolverInterface`, use `ValueResolverInterface` instead
+ * Remove `StreamedResponseListener`
+ * Remove `AbstractSurrogate::$phpEscapeMap`
+ * Remove `HttpKernelInterface::MASTER_REQUEST`
+ * Remove `terminate_on_cache_hit` option from `HttpCache`
+ * Require explicit argument when calling `ConfigDataCollector::setKernel()`, `RouterListener::setCurrentRequest()`
+ * Remove `Kernel::stripComments()`
+ * Remove `FileLinkFormatter`, use `FileLinkFormatter` from the ErrorHandler component instead
+ * Remove `UriSigner`, use `UriSigner` from the HttpFoundation component instead
+ * Add argument `$buildDir` to `WarmableInterface`
+ * Add argument `$filter` to `Profiler::find()` and `FileProfilerStorage::find()`
 
 6.4
 ---
 
- * Make `HeaderBag::getDate()`, `Response::getDate()`, `getExpires()` and `getLastModified()` return a `DateTimeImmutable`
- * Support root-level `Generator` in `StreamedJsonResponse`
- * Add `UriSigner` from the HttpKernel component
- * Add `partitioned` flag to `Cookie` (CHIPS Cookie)
- * Add argument `bool $flush = true` to `Response::send()`
-* Make `MongoDbSessionHandler` instantiable with the mongodb extension directly
+ * Support backed enums in #[MapQueryParameter]
+ * `BundleInterface` no longer extends `ContainerAwareInterface`
+ * Add optional `$className` parameter to `ControllerEvent::getAttributes()`
+ * Add native return types to `TraceableEventDispatcher` and to `MergeExtensionConfigurationPass`
+ * Add argument `$validationFailedStatusCode` to `#[MapQueryString]` and `#[MapRequestPayload]`
+ * Add argument `$debug` to `Logger`
+ * Add class `DebugLoggerConfigurator`
+ * Add parameters `kernel.runtime_mode` and `kernel.runtime_mode.*`, all set from env var `APP_RUNTIME_MODE`
+ * Deprecate `Kernel::stripComments()`
+ * Support the `!` character at the beginning of a string as a negation operator in the url filter of the profiler
+ * Deprecate `UriSigner`, use `UriSigner` from the HttpFoundation component instead
+ * Deprecate `FileLinkFormatter`, use `FileLinkFormatter` from the ErrorHandler component instead
+ * Add argument `$buildDir` to `WarmableInterface`
+ * Add argument `$filter` to `Profiler::find()` and `FileProfilerStorage::find()`
+ * Add `ControllerResolver::allowControllers()` to define which callables are legit controllers when the `_check_controller_is_allowed` request attribute is set
 
 6.3
 ---
 
- * Calling `ParameterBag::getDigit()`, `getAlnum()`, `getAlpha()` on an `array` throws a `UnexpectedValueException` instead of a `TypeError`
- * Add `ParameterBag::getString()` to convert a parameter into string and throw an exception if the value is invalid
- * Add `ParameterBag::getEnum()`
- * Create migration for session table when pdo handler is used
- * Add support for Relay PHP extension for Redis
- * The `Response::sendHeaders()` method now takes an optional HTTP status code as parameter, allowing to send informational responses such as Early Hints responses (103 status code)
- * Add `IpUtils::isPrivateIp()`
- * Add `Request::getPayload(): InputBag`
- * Deprecate conversion of invalid values in `ParameterBag::getInt()` and `ParameterBag::getBoolean()`,
- * Deprecate ignoring invalid values when using `ParameterBag::filter()`, unless flag `FILTER_NULL_ON_FAILURE` is set
+ * Deprecate parameters `container.dumper.inline_factories` and `container.dumper.inline_class_loader`, use `.container.dumper.inline_factories` and `.container.dumper.inline_class_loader` instead
+ * `FileProfilerStorage` removes profiles automatically after two days
+ * Add `#[WithHttpStatus]` for defining status codes for exceptions
+ * Use an instance of `Psr\Clock\ClockInterface` to generate the current date time in `DateTimeValueResolver`
+ * Add `#[WithLogLevel]` for defining log levels for exceptions
+ * Add `skip_response_headers` to the `HttpCache` options
+ * Introduce targeted value resolvers with `#[ValueResolver]` and `#[AsTargetedValueResolver]`
+ * Add `#[MapRequestPayload]` to map and validate request payload from `Request::getContent()` or `Request::$request->all()` to typed objects
+ * Add `#[MapQueryString]` to map and validate request query string from `Request::$query->all()` to typed objects
+ * Add `#[MapQueryParameter]` to map and validate individual query parameters to controller arguments
+ * Collect data from every event dispatcher
 
 6.2
 ---
 
- * Add `StreamedJsonResponse` class for efficient JSON streaming
- * The HTTP cache store uses the `xxh128` algorithm
- * Deprecate calling `JsonResponse::setCallback()`, `Response::setExpires/setLastModified/setEtag()`, `MockArraySessionStorage/NativeSessionStorage::setMetadataBag()`, `NativeSessionStorage::setSaveHandler()` without arguments
- * Add request matchers under the `Symfony\Component\HttpFoundation\RequestMatcher` namespace
- * Deprecate `RequestMatcher` in favor of `ChainRequestMatcher`
- * Deprecate `Symfony\Component\HttpFoundation\ExpressionRequestMatcher` in favor of `Symfony\Component\HttpFoundation\RequestMatcher\ExpressionRequestMatcher`
+ * Add constructor argument `bool $handleAllThrowable` to `HttpKernel`
+ * Add `ControllerEvent::getAttributes()` to handle attributes on controllers
+ * Add `#[Cache]` to describe the default HTTP cache headers on controllers
+ * Add `absolute_uri` option to surrogate fragment renderers
+ * Add `ValueResolverInterface` and deprecate `ArgumentValueResolverInterface`
+ * Add argument `$reflector` to `ArgumentResolverInterface` and `ArgumentMetadataFactoryInterface`
+ * Deprecate calling `ConfigDataCollector::setKernel()`, `RouterListener::setCurrentRequest()` without arguments
 
 6.1
 ---
 
- * Add stale while revalidate and stale if error cache header
- * Allow dynamic session "ttl" when using a remote storage
- * Deprecate `Request::getContentType()`, use `Request::getContentTypeFormat()` instead
+ * Add `BackedEnumValueResolver` to resolve backed enum cases from request attributes in controller arguments
+ * Add `DateTimeValueResolver` to resolve request attributes into DateTime objects in controller arguments
+ * Deprecate StreamedResponseListener, it's not needed anymore
+ * Add `Profiler::isEnabled()` so collaborating collector services may elect to omit themselves
+ * Add the `UidValueResolver` argument value resolver
+ * Add `AbstractBundle` class for DI configuration/definition on a single file
+ * Update the path of a bundle placed in the `src/` directory to the parent directory when `AbstractBundle` is used
 
 6.0
 ---
 
- * Remove the `NamespacedAttributeBag` class
- * Removed `Response::create()`, `JsonResponse::create()`,
-   `RedirectResponse::create()`, `StreamedResponse::create()` and
-   `BinaryFileResponse::create()` methods (use `__construct()` instead)
- * Not passing a `Closure` together with `FILTER_CALLBACK` to `ParameterBag::filter()` throws an `\InvalidArgumentException`; wrap your filter in a closure instead
- * Not passing a `Closure` together with `FILTER_CALLBACK` to `InputBag::filter()` throws an `\InvalidArgumentException`; wrap your filter in a closure instead
- * Removed the `Request::HEADER_X_FORWARDED_ALL` constant, use either `Request::HEADER_X_FORWARDED_FOR | Request::HEADER_X_FORWARDED_HOST | Request::HEADER_X_FORWARDED_PORT | Request::HEADER_X_FORWARDED_PROTO` or `Request::HEADER_X_FORWARDED_AWS_ELB` or `Request::HEADER_X_FORWARDED_TRAEFIK`constants instead
- * Rename `RequestStack::getMasterRequest()` to `getMainRequest()`
- * Not passing `FILTER_REQUIRE_ARRAY` or `FILTER_FORCE_ARRAY` flags to `InputBag::filter()` when filtering an array will throw `BadRequestException`
- * Removed the `Request::HEADER_X_FORWARDED_ALL` constant
- * Retrieving non-scalar values using `InputBag::get()` will throw `BadRequestException` (use `InputBad::all()` instead to retrieve an array)
- * Passing non-scalar default value as the second argument `InputBag::get()` will throw `\InvalidArgumentException`
- * Passing non-scalar, non-array value as the second argument `InputBag::set()` will throw `\InvalidArgumentException`
- * Passing `null` as `$requestIp` to `IpUtils::__checkIp()`, `IpUtils::__checkIp4()` or `IpUtils::__checkIp6()` is not supported anymore.
+ * Remove `ArgumentInterface`
+ * Remove `ArgumentMetadata::getAttribute()`, use `getAttributes()` instead
+ * Remove support for returning a `ContainerBuilder` from `KernelInterface::registerContainerConfiguration()`
+ * Remove `KernelEvent::isMasterRequest()`, use `isMainRequest()` instead
+ * Remove support for `service:action` syntax to reference controllers, use `serviceOrFqcn::method` instead
 
 5.4
 ---
 
- * Deprecate passing `null` as `$requestIp` to `IpUtils::__checkIp()`, `IpUtils::__checkIp4()` or `IpUtils::__checkIp6()`, pass an empty string instead.
- * Add the `litespeed_finish_request` method to work with Litespeed
- * Deprecate `upload_progress.*` and `url_rewriter.tags` session options
- * Allow setting session options via DSN
+ * Add the ability to enable the profiler using a request query parameter, body parameter or attribute
+ * Deprecate `AbstractTestSessionListener` and `TestSessionListener`, use `AbstractSessionListener` and `SessionListener` instead
+ * Deprecate the `fileLinkFormat` parameter of `DebugHandlersListener`
+ * Add support for configuring log level, and status code by exception class
+ * Allow ignoring "kernel.reset" methods that don't exist with "on_invalid" attribute
 
 5.3
 ---
 
- * Add the `SessionFactory`, `NativeSessionStorageFactory`, `PhpBridgeSessionStorageFactory` and `MockFileSessionStorageFactory` classes
- * Calling `Request::getSession()` when there is no available session throws a `SessionNotFoundException`
- * Add the `RequestStack::getSession` method
- * Deprecate the `NamespacedAttributeBag` class
- * Add `ResponseFormatSame` PHPUnit constraint
- * Deprecate the `RequestStack::getMasterRequest()` method and add `getMainRequest()` as replacement
+ * Deprecate `ArgumentInterface`
+ * Add `ArgumentMetadata::getAttributes()`
+ * Deprecate `ArgumentMetadata::getAttribute()`, use `getAttributes()` instead
+ * Mark the class `Symfony\Component\HttpKernel\EventListener\DebugHandlersListener` as internal
+ * Deprecate returning a `ContainerBuilder` from `KernelInterface::registerContainerConfiguration()`
+ * Deprecate `HttpKernelInterface::MASTER_REQUEST` and add `HttpKernelInterface::MAIN_REQUEST` as replacement
+ * Deprecate `KernelEvent::isMasterRequest()` and add `isMainRequest()` as replacement
+ * Add `#[AsController]` attribute for declaring standalone controllers on PHP 8
+ * Add `FragmentUriGeneratorInterface` and `FragmentUriGenerator` to generate the URI of a fragment
 
 5.2.0
 -----
 
- * added support for `X-Forwarded-Prefix` header
- * added `HeaderUtils::parseQuery()`: it does the same as `parse_str()` but preserves dots in variable names
- * added `File::getContent()`
- * added ability to use comma separated ip addresses for `RequestMatcher::matchIps()`
- * added `Request::toArray()` to parse a JSON request body to an array
- * added `RateLimiter\RequestRateLimiterInterface` and `RateLimiter\AbstractRequestRateLimiter`
- * deprecated not passing a `Closure` together with `FILTER_CALLBACK` to `ParameterBag::filter()`; wrap your filter in a closure instead.
- * Deprecated the `Request::HEADER_X_FORWARDED_ALL` constant, use either `HEADER_X_FORWARDED_FOR | HEADER_X_FORWARDED_HOST | HEADER_X_FORWARDED_PORT | HEADER_X_FORWARDED_PROTO` or `HEADER_X_FORWARDED_AWS_ELB` or `HEADER_X_FORWARDED_TRAEFIK` constants instead.
- * Deprecated `BinaryFileResponse::create()`, use `__construct()` instead
+ * added session usage
+ * made the public `http_cache` service handle requests when available
+ * allowed enabling trusted hosts and proxies using new `kernel.trusted_hosts`,
+   `kernel.trusted_proxies` and `kernel.trusted_headers` parameters
+ * content of request parameter `_password` is now also hidden
+   in the request profiler raw content section
+ * Allowed adding attributes on controller arguments that will be passed to argument resolvers.
+ * kernels implementing the `ExtensionInterface` will now be auto-registered to the container
+ * added parameter `kernel.runtime_environment`, defined as `%env(default:kernel.environment:APP_RUNTIME_ENV)%`
+ * do not set a default `Accept` HTTP header when using `HttpKernelBrowser`
 
 5.1.0
 -----
 
- * added `Cookie::withValue`, `Cookie::withDomain`, `Cookie::withExpires`,
-   `Cookie::withPath`, `Cookie::withSecure`, `Cookie::withHttpOnly`,
-   `Cookie::withRaw`, `Cookie::withSameSite`
- * Deprecate `Response::create()`, `JsonResponse::create()`,
-   `RedirectResponse::create()`, and `StreamedResponse::create()` methods (use
-   `__construct()` instead)
- * added `Request::preferSafeContent()` and `Response::setContentSafe()` to handle "safe" HTTP preference
-   according to [RFC 8674](https://tools.ietf.org/html/rfc8674)
- * made the Mime component an optional dependency
- * added `MarshallingSessionHandler`, `IdentityMarshaller`
- * made `Session` accept a callback to report when the session is being used
- * Add support for all core cache control directives
- * Added `Symfony\Component\HttpFoundation\InputBag`
- * Deprecated retrieving non-string values using `InputBag::get()`, use `InputBag::all()` if you need access to the collection of values
+ * allowed to use a specific logger channel for deprecations
+ * made `WarmableInterface::warmUp()` return a list of classes or files to preload on PHP 7.4+;
+   not returning an array is deprecated
+ * made kernels implementing `WarmableInterface` be part of the cache warmup stage
+ * deprecated support for `service:action` syntax to reference controllers, use `serviceOrFqcn::method` instead
+ * allowed using public aliases to reference controllers
+ * added session usage reporting when the `_stateless` attribute of the request is set to `true`
+ * added `AbstractSessionListener::onSessionUsage()` to report when the session is used while a request is stateless
 
 5.0.0
 -----
 
- * made `Cookie` auto-secure and lax by default
- * removed classes in the `MimeType` namespace, use the Symfony Mime component instead
- * removed method `UploadedFile::getClientSize()` and the related constructor argument
- * made `Request::getSession()` throw if the session has not been set before
- * removed `Response::HTTP_RESERVED_FOR_WEBDAV_ADVANCED_COLLECTIONS_EXPIRED_PROPOSAL`
- * passing a null url when instantiating a `RedirectResponse` is not allowed
+ * removed support for getting the container from a non-booted kernel
+ * removed the first and second constructor argument of `ConfigDataCollector`
+ * removed `ConfigDataCollector::getApplicationName()`
+ * removed `ConfigDataCollector::getApplicationVersion()`
+ * removed support for `Symfony\Component\Templating\EngineInterface` in `HIncludeFragmentRenderer`, use a `Twig\Environment` only
+ * removed `TranslatorListener` in favor of `LocaleAwareListener`
+ * removed `getRootDir()` and `getName()` from `Kernel` and `KernelInterface`
+ * removed `FilterControllerArgumentsEvent`, use `ControllerArgumentsEvent` instead
+ * removed `FilterControllerEvent`, use `ControllerEvent` instead
+ * removed `FilterResponseEvent`, use `ResponseEvent` instead
+ * removed `GetResponseEvent`, use `RequestEvent` instead
+ * removed `GetResponseForControllerResultEvent`, use `ViewEvent` instead
+ * removed `GetResponseForExceptionEvent`, use `ExceptionEvent` instead
+ * removed `PostResponseEvent`, use `TerminateEvent` instead
+ * removed `SaveSessionListener` in favor of `AbstractSessionListener`
+ * removed `Client`, use `HttpKernelBrowser` instead
+ * added method `getProjectDir()` to `KernelInterface`
+ * removed methods `serialize` and `unserialize` from `DataCollector`, store the serialized state in the data property instead
+ * made `ProfilerStorageInterface` internal
+ * removed the second and third argument of `KernelInterface::locateResource`
+ * removed the second and third argument of `FileLocator::__construct`
+ * removed loading resources from `%kernel.root_dir%/Resources` and `%kernel.root_dir%` as
+   fallback directories.
+ * removed class `ExceptionListener`, use `ErrorListener` instead
 
 4.4.0
 -----
 
- * passing arguments to `Request::isMethodSafe()` is deprecated.
- * `ApacheRequest` is deprecated, use the `Request` class instead.
- * passing a third argument to `HeaderBag::get()` is deprecated, use method `all()` instead
- * [BC BREAK] `PdoSessionHandler` with MySQL changed the type of the lifetime column,
-   make sure to run `ALTER TABLE sessions MODIFY sess_lifetime INTEGER UNSIGNED NOT NULL` to
-   update your database.
- * `PdoSessionHandler` now precalculates the expiry timestamp in the lifetime column,
-    make sure to run `CREATE INDEX expiry ON sessions (sess_lifetime)` to update your database
-    to speed up garbage collection of expired sessions.
- * added `SessionHandlerFactory` to create session handlers with a DSN
- * added `IpUtils::anonymize()` to help with GDPR compliance.
+ * The `DebugHandlersListener` class has been marked as `final`
+ * Added new Bundle directory convention consistent with standard skeletons
+ * Deprecated the second and third argument of `KernelInterface::locateResource`
+ * Deprecated the second and third argument of `FileLocator::__construct`
+ * Deprecated loading resources from `%kernel.root_dir%/Resources` and `%kernel.root_dir%` as
+   fallback directories. Resources like service definitions are usually loaded relative to the
+   current directory or with a glob pattern. The fallback directories have never been advocated
+   so you likely do not use those in any app based on the SF Standard or Flex edition.
+ * Marked all dispatched event classes as `@final`
+ * Added `ErrorController` to enable the preview and error rendering mechanism
+ * Getting the container from a non-booted kernel is deprecated.
+ * Marked the `AjaxDataCollector`, `ConfigDataCollector`, `EventDataCollector`,
+   `ExceptionDataCollector`, `LoggerDataCollector`, `MemoryDataCollector`,
+   `RequestDataCollector` and `TimeDataCollector` classes as `@final`.
+ * Marked the `RouterDataCollector::collect()` method as `@final`.
+ * The `DataCollectorInterface::collect()` and `Profiler::collect()` methods third parameter signature
+   will be `\Throwable $exception = null` instead of `\Exception $exception = null` in Symfony 5.0.
+ * Deprecated methods `ExceptionEvent::get/setException()`, use `get/setThrowable()` instead
+ * Deprecated class `ExceptionListener`, use `ErrorListener` instead
 
 4.3.0
 -----
 
- * added PHPUnit constraints: `RequestAttributeValueSame`, `ResponseCookieValueSame`, `ResponseHasCookie`,
-   `ResponseHasHeader`, `ResponseHeaderSame`, `ResponseIsRedirected`, `ResponseIsSuccessful`, and `ResponseStatusCodeSame`
- * deprecated `MimeTypeGuesserInterface` and `ExtensionGuesserInterface` in favor of `Symfony\Component\Mime\MimeTypesInterface`.
- * deprecated `MimeType` and `MimeTypeExtensionGuesser` in favor of `Symfony\Component\Mime\MimeTypes`.
- * deprecated `FileBinaryMimeTypeGuesser` in favor of `Symfony\Component\Mime\FileBinaryMimeTypeGuesser`.
- * deprecated `FileinfoMimeTypeGuesser` in favor of `Symfony\Component\Mime\FileinfoMimeTypeGuesser`.
- * added `UrlHelper` that allows to get an absolute URL and a relative path for a given path
+ * renamed `Client` to `HttpKernelBrowser`
+ * `KernelInterface` doesn't extend `Serializable` anymore
+ * deprecated the `Kernel::serialize()` and `unserialize()` methods
+ * increased the priority of `Symfony\Component\HttpKernel\EventListener\AddRequestFormatsListener`
+ * made `Symfony\Component\HttpKernel\EventListener\LocaleListener` set the default locale early
+ * deprecated `TranslatorListener` in favor of `LocaleAwareListener`
+ * added the registration of all `LocaleAwareInterface` implementations into the `LocaleAwareListener`
+ * made `FileLinkFormatter` final and not implement `Serializable` anymore
+ * the base `DataCollector` doesn't implement `Serializable` anymore, you should
+   store all the serialized state in the data property instead
+ * `DumpDataCollector` has been marked as `final`
+ * added an event listener to prevent search engines from indexing applications in debug mode.
+ * renamed `FilterControllerArgumentsEvent` to `ControllerArgumentsEvent`
+ * renamed `FilterControllerEvent` to `ControllerEvent`
+ * renamed `FilterResponseEvent` to `ResponseEvent`
+ * renamed `GetResponseEvent` to `RequestEvent`
+ * renamed `GetResponseForControllerResultEvent` to `ViewEvent`
+ * renamed `GetResponseForExceptionEvent` to `ExceptionEvent`
+ * renamed `PostResponseEvent` to `TerminateEvent`
+ * added `HttpClientKernel` for handling requests with an `HttpClientInterface` instance
+ * added `trace_header` and `trace_level` configuration options to `HttpCache`
 
 4.2.0
 -----
 
- * the default value of the "$secure" and "$samesite" arguments of Cookie's constructor
-   will respectively change from "false" to "null" and from "null" to "lax" in Symfony
-   5.0, you should define their values explicitly or use "Cookie::create()" instead.
- * added `matchPort()` in RequestMatcher
-
-4.1.3
------
-
- * [BC BREAK] Support for the IIS-only `X_ORIGINAL_URL` and `X_REWRITE_URL`
-   HTTP headers has been dropped for security reasons.
+ * deprecated `KernelInterface::getRootDir()` and the `kernel.root_dir` parameter
+ * deprecated `KernelInterface::getName()` and the `kernel.name` parameter
+ * deprecated the first and second constructor argument of `ConfigDataCollector`
+ * deprecated `ConfigDataCollector::getApplicationName()`
+ * deprecated `ConfigDataCollector::getApplicationVersion()`
 
 4.1.0
 -----
 
- * Query string normalization uses `parse_str()` instead of custom parsing logic.
- * Passing the file size to the constructor of the `UploadedFile` class is deprecated.
- * The `getClientSize()` method of the `UploadedFile` class is deprecated. Use `getSize()` instead.
- * added `RedisSessionHandler` to use Redis as a session storage
- * The `get()` method of the `AcceptHeader` class now takes into account the
-   `*` and `*/*` default values (if they are present in the Accept HTTP header)
-   when looking for items.
- * deprecated `Request::getSession()` when no session has been set. Use `Request::hasSession()` instead.
- * added `CannotWriteFileException`, `ExtensionFileException`, `FormSizeFileException`,
-   `IniSizeFileException`, `NoFileException`, `NoTmpDirFileException`, `PartialFileException` to
-   handle failed `UploadedFile`.
- * added `MigratingSessionHandler` for migrating between two session handlers without losing sessions
- * added `HeaderUtils`.
+ * added orphaned events support to `EventDataCollector`
+ * `ExceptionListener` now logs exceptions at priority `0` (previously logged at `-128`)
+ * Added support for using `service::method` to reference controllers, making it consistent with other cases. It is recommended over the `service:action` syntax with a single colon, which will be deprecated in the future.
+ * Added the ability to profile individual argument value resolvers via the
+   `Symfony\Component\HttpKernel\Controller\ArgumentResolver\TraceableValueResolver`
 
 4.0.0
 -----
 
- * the `Request::setTrustedHeaderName()` and `Request::getTrustedHeaderName()`
-   methods have been removed
- * the `Request::HEADER_CLIENT_IP` constant has been removed, use
-   `Request::HEADER_X_FORWARDED_FOR` instead
- * the `Request::HEADER_CLIENT_HOST` constant has been removed, use
-   `Request::HEADER_X_FORWARDED_HOST` instead
- * the `Request::HEADER_CLIENT_PROTO` constant has been removed, use
-   `Request::HEADER_X_FORWARDED_PROTO` instead
- * the `Request::HEADER_CLIENT_PORT` constant has been removed, use
-   `Request::HEADER_X_FORWARDED_PORT` instead
- * checking for cacheable HTTP methods using the `Request::isMethodSafe()`
-   method (by not passing `false` as its argument) is not supported anymore and
-   throws a `\BadMethodCallException`
- * the `WriteCheckSessionHandler`, `NativeSessionHandler` and `NativeProxy` classes have been removed
- * setting session save handlers that do not implement `\SessionHandlerInterface` in
-   `NativeSessionStorage::setSaveHandler()` is not supported anymore and throws a
-   `\TypeError`
+ * removed the `DataCollector::varToString()` method, use `DataCollector::cloneVar()`
+   instead
+ * using the `DataCollector::cloneVar()` method requires the VarDumper component
+ * removed the `ValueExporter` class
+ * removed `ControllerResolverInterface::getArguments()`
+ * removed `TraceableControllerResolver::getArguments()`
+ * removed `ControllerResolver::getArguments()` and the ability to resolve arguments
+ * removed the `argument_resolver` service dependency from the `debug.controller_resolver`
+ * removed `LazyLoadingFragmentHandler::addRendererService()`
+ * removed `Psr6CacheClearer::addPool()`
+ * removed `Extension::addClassesToCompile()` and `Extension::getClassesToCompile()`
+ * removed `Kernel::loadClassCache()`, `Kernel::doLoadClassCache()`, `Kernel::setClassCache()`,
+   and `Kernel::getEnvParameters()`
+ * support for the `X-Status-Code` when handling exceptions in the `HttpKernel`
+   has been dropped, use the `HttpKernel::allowCustomResponseCode()` method
+   instead
+ * removed convention-based commands registration
+ * removed the `ChainCacheClearer::add()` method
+ * removed the `CacheaWarmerAggregate::add()` and `setWarmers()` methods
+ * made `CacheWarmerAggregate` and `ChainCacheClearer` classes final
 
 3.4.0
 -----
 
- * implemented PHP 7.0's `SessionUpdateTimestampHandlerInterface` with a new
-   `AbstractSessionHandler` base class and a new `StrictSessionHandler` wrapper
- * deprecated the `WriteCheckSessionHandler`, `NativeSessionHandler` and `NativeProxy` classes
- * deprecated setting session save handlers that do not implement `\SessionHandlerInterface` in `NativeSessionStorage::setSaveHandler()`
- * deprecated using `MongoDbSessionHandler` with the legacy mongo extension; use it with the mongodb/mongodb package and ext-mongodb instead
- * deprecated `MemcacheSessionHandler`; use `MemcachedSessionHandler` instead
+ * added a minimalist PSR-3 `Logger` class that writes in `stderr`
+ * made kernels implementing `CompilerPassInterface` able to process the container
+ * deprecated bundle inheritance
+ * added `RebootableInterface` and implemented it in `Kernel`
+ * deprecated commands auto registration
+ * deprecated `EnvParametersResource`
+ * added `Symfony\Component\HttpKernel\Client::catchExceptions()`
+ * deprecated the `ChainCacheClearer::add()` method
+ * deprecated the `CacheaWarmerAggregate::add()` and `setWarmers()` methods
+ * made `CacheWarmerAggregate` and `ChainCacheClearer` classes final
+ * added the possibility to reset the profiler to its initial state
+ * deprecated data collectors without a `reset()` method
+ * deprecated implementing `DebugLoggerInterface` without a `clear()` method
 
 3.3.0
 -----
 
- * the `Request::setTrustedProxies()` method takes a new `$trustedHeaderSet` argument,
-   see https://symfony.com/doc/current/deployment/proxies.html for more info,
- * deprecated the `Request::setTrustedHeaderName()` and `Request::getTrustedHeaderName()` methods,
- * added `File\Stream`, to be passed to `BinaryFileResponse` when the size of the served file is unknown,
-   disabling `Range` and `Content-Length` handling, switching to chunked encoding instead
- * added the `Cookie::fromString()` method that allows to create a cookie from a
-   raw header string
+ * added `kernel.project_dir` and `Kernel::getProjectDir()`
+ * deprecated `kernel.root_dir` and `Kernel::getRootDir()`
+ * deprecated `Kernel::getEnvParameters()`
+ * deprecated the special `SYMFONY__` environment variables
+ * added the possibility to change the query string parameter used by `UriSigner`
+ * deprecated `LazyLoadingFragmentHandler::addRendererService()`
+ * deprecated `Extension::addClassesToCompile()` and `Extension::getClassesToCompile()`
+ * deprecated `Psr6CacheClearer::addPool()`
+
+3.2.0
+-----
+
+ * deprecated `DataCollector::varToString()`, use `cloneVar()` instead
+ * changed surrogate capability name in `AbstractSurrogate::addSurrogateCapability` to 'symfony'
+ * Added `ControllerArgumentValueResolverPass`
 
 3.1.0
 -----
-
- * Added support for creating `JsonResponse` with a string of JSON data
+ * deprecated passing objects as URI attributes to the ESI and SSI renderers
+ * deprecated `ControllerResolver::getArguments()`
+ * added `Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface`
+ * added `Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface` as argument to `HttpKernel`
+ * added `Symfony\Component\HttpKernel\Controller\ArgumentResolver`
+ * added `Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::getMethod()`
+ * added `Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::getRedirect()`
+ * added the `kernel.controller_arguments` event, triggered after controller arguments have been resolved
 
 3.0.0
 -----
 
- * The precedence of parameters returned from `Request::get()` changed from "GET, PATH, BODY" to "PATH, GET, BODY"
+ * removed `Symfony\Component\HttpKernel\Kernel::init()`
+ * removed `Symfony\Component\HttpKernel\Kernel::isClassInActiveBundle()` and `Symfony\Component\HttpKernel\KernelInterface::isClassInActiveBundle()`
+ * removed `Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher::setProfiler()`
+ * removed `Symfony\Component\HttpKernel\EventListener\FragmentListener::getLocalIpAddresses()`
+ * removed `Symfony\Component\HttpKernel\EventListener\LocaleListener::setRequest()`
+ * removed `Symfony\Component\HttpKernel\EventListener\RouterListener::setRequest()`
+ * removed `Symfony\Component\HttpKernel\EventListener\ProfilerListener::onKernelRequest()`
+ * removed `Symfony\Component\HttpKernel\Fragment\FragmentHandler::setRequest()`
+ * removed `Symfony\Component\HttpKernel\HttpCache\Esi::hasSurrogateEsiCapability()`
+ * removed `Symfony\Component\HttpKernel\HttpCache\Esi::addSurrogateEsiCapability()`
+ * removed `Symfony\Component\HttpKernel\HttpCache\Esi::needsEsiParsing()`
+ * removed `Symfony\Component\HttpKernel\HttpCache\HttpCache::getEsi()`
+ * removed `Symfony\Component\HttpKernel\DependencyInjection\ContainerAwareHttpKernel`
+ * removed `Symfony\Component\HttpKernel\DependencyInjection\RegisterListenersPass`
+ * removed `Symfony\Component\HttpKernel\EventListener\ErrorsLoggerListener`
+ * removed `Symfony\Component\HttpKernel\EventListener\EsiListener`
+ * removed `Symfony\Component\HttpKernel\HttpCache\EsiResponseCacheStrategy`
+ * removed `Symfony\Component\HttpKernel\HttpCache\EsiResponseCacheStrategyInterface`
+ * removed `Symfony\Component\HttpKernel\Log\LoggerInterface`
+ * removed `Symfony\Component\HttpKernel\Log\NullLogger`
+ * removed `Symfony\Component\HttpKernel\Profiler::import()`
+ * removed `Symfony\Component\HttpKernel\Profiler::export()`
 
 2.8.0
 -----
 
- * Finding deep items in `ParameterBag::get()` is deprecated since version 2.8 and
-   will be removed in 3.0.
+ * deprecated `Profiler::import` and `Profiler::export`
+
+2.7.0
+-----
+
+ * added the HTTP status code to profiles
 
 2.6.0
 -----
 
- * PdoSessionHandler changes
-   - implemented different session locking strategies to prevent loss of data by concurrent access to the same session
-   - [BC BREAK] save session data in a binary column without base64_encode
-   - [BC BREAK] added lifetime column to the session table which allows to have different lifetimes for each session
-   - implemented lazy connections that are only opened when a session is used by either passing a dsn string
-     explicitly or falling back to session.save_path ini setting
-   - added a createTable method that initializes a correctly defined table depending on the database vendor
+ * deprecated `Symfony\Component\HttpKernel\EventListener\ErrorsLoggerListener`, use `Symfony\Component\HttpKernel\EventListener\DebugHandlersListener` instead
+ * deprecated unused method `Symfony\Component\HttpKernel\Kernel::isClassInActiveBundle` and `Symfony\Component\HttpKernel\KernelInterface::isClassInActiveBundle`
 
 2.5.0
 -----
 
- * added `JsonResponse::setEncodingOptions()` & `JsonResponse::getEncodingOptions()` for easier manipulation
-   of the options used while encoding data to JSON format.
+ * deprecated `Symfony\Component\HttpKernel\DependencyInjection\RegisterListenersPass`, use `Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass` instead
 
 2.4.0
 -----
 
- * added RequestStack
- * added Request::getEncodings()
- * added accessors methods to session handlers
+ * added event listeners for the session
+ * added the KernelEvents::FINISH_REQUEST event
 
 2.3.0
 -----
 
- * added support for ranges of IPs in trusted proxies
- * `UploadedFile::isValid` now returns false if the file was not uploaded via HTTP (in a non-test mode)
- * Improved error-handling of `\Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler`
-   to ensure the supplied PDO handler throws Exceptions on error (as the class expects). Added related test cases
-   to verify that Exceptions are properly thrown when the PDO queries fail.
+ * [BC BREAK] renamed `Symfony\Component\HttpKernel\EventListener\DeprecationLoggerListener` to `Symfony\Component\HttpKernel\EventListener\ErrorsLoggerListener` and changed its constructor
+ * deprecated `Symfony\Component\HttpKernel\Debug\ErrorHandler`, `Symfony\Component\HttpKernel\Debug\ExceptionHandler`,
+   `Symfony\Component\HttpKernel\Exception\FatalErrorException` and `Symfony\Component\HttpKernel\Exception\FlattenException`
+ * deprecated `Symfony\Component\HttpKernel\Kernel::init()`
+ * added the possibility to specify an id an extra attributes to hinclude tags
+ * added the collect of data if a controller is a Closure in the Request collector
+ * pass exceptions from the ExceptionListener to the logger using the logging context to allow for more
+   detailed messages
 
 2.2.0
 -----
 
- * fixed the Request::create() precedence (URI information always take precedence now)
- * added Request::getTrustedProxies()
- * deprecated Request::isProxyTrusted()
- * [BC BREAK] JsonResponse does not turn a top level empty array to an object anymore, use an ArrayObject to enforce objects
- * added a IpUtils class to check if an IP belongs to a CIDR
- * added Request::getRealMethod() to get the "real" HTTP method (getMethod() returns the "intended" HTTP method)
- * disabled _method request parameter support by default (call Request::enableHttpMethodParameterOverride() to
-   enable it, and Request::getHttpMethodParameterOverride() to check if it is supported)
- * Request::splitHttpAcceptHeader() method is deprecated and will be removed in 2.3
- * Deprecated Flashbag::count() and \Countable interface, will be removed in 2.3
+ * [BC BREAK] the path info for sub-request is now always _fragment (or whatever you configured instead of the default)
+ * added Symfony\Component\HttpKernel\EventListener\FragmentListener
+ * added Symfony\Component\HttpKernel\UriSigner
+ * added Symfony\Component\HttpKernel\FragmentRenderer and rendering strategies (in Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface)
+ * added Symfony\Component\HttpKernel\DependencyInjection\ContainerAwareHttpKernel
+ * added ControllerReference to create reference of Controllers (used in the FragmentRenderer class)
+ * [BC BREAK] renamed TimeDataCollector::getTotalTime() to
+   TimeDataCollector::getDuration()
+ * updated the MemoryDataCollector to include the memory used in the
+   kernel.terminate event listeners
+ * moved the Stopwatch classes to a new component
+ * added TraceableControllerResolver
+ * added TraceableEventDispatcher (removed ContainerAwareTraceableEventDispatcher)
+ * added support for WinCache opcode cache in ConfigDataCollector
 
 2.1.0
 -----
 
- * added Request::getSchemeAndHttpHost() and Request::getUserInfo()
- * added a fluent interface to the Response class
- * added Request::isProxyTrusted()
- * added JsonResponse
- * added a getTargetUrl method to RedirectResponse
- * added support for streamed responses
- * made Response::prepare() method the place to enforce HTTP specification
- * [BC BREAK] moved management of the locale from the Session class to the Request class
- * added a generic access to the PHP built-in filter mechanism: ParameterBag::filter()
- * made FileBinaryMimeTypeGuesser command configurable
- * added Request::getUser() and Request::getPassword()
- * added support for the PATCH method in Request
- * removed the ContentTypeMimeTypeGuesser class as it is deprecated and never used on PHP 5.3
- * added ResponseHeaderBag::makeDisposition() (implements RFC 6266)
- * made mimetype to extension conversion configurable
- * [BC BREAK] Moved all session related classes and interfaces into own namespace, as
-   `Symfony\Component\HttpFoundation\Session` and renamed classes accordingly.
-   Session handlers are located in the subnamespace `Symfony\Component\HttpFoundation\Session\Handler`.
- * SessionHandlers must implement `\SessionHandlerInterface` or extend from the
-   `Symfony\Component\HttpFoundation\Storage\Handler\NativeSessionHandler` base class.
- * Added internal storage driver proxy mechanism for forward compatibility with
-   PHP 5.4 `\SessionHandler` class.
- * Added session handlers for custom Memcache, Memcached and Null session save handlers.
- * [BC BREAK] Removed `NativeSessionStorage` and replaced with `NativeFileSessionHandler`.
- * [BC BREAK] `SessionStorageInterface` methods removed: `write()`, `read()` and
-   `remove()`.  Added `getBag()`, `registerBag()`.  The `NativeSessionStorage` class
-   is a mediator for the session storage internals including the session handlers
-   which do the real work of participating in the internal PHP session workflow.
- * [BC BREAK] Introduced mock implementations of `SessionStorage` to enable unit
-   and functional testing without starting real PHP sessions.  Removed
-   `ArraySessionStorage`, and replaced with `MockArraySessionStorage` for unit
-   tests; removed `FilesystemSessionStorage`, and replaced with`MockFileSessionStorage`
-   for functional tests.  These do not interact with global session ini
-   configuration values, session functions or `$_SESSION` superglobal. This means
-   they can be configured directly allowing multiple instances to work without
-   conflicting in the same PHP process.
- * [BC BREAK] Removed the `close()` method from the `Session` class, as this is
-   now redundant.
- * Deprecated the following methods from the Session class: `setFlash()`, `setFlashes()`
-   `getFlash()`, `hasFlash()`, and `removeFlash()`. Use `getFlashBag()` instead
-   which returns a `FlashBagInterface`.
- * `Session->clear()` now only clears session attributes as before it cleared
-   flash messages and attributes. `Session->getFlashBag()->all()` clears flashes now.
- * Session data is now managed by `SessionBagInterface` to better encapsulate
-   session data.
- * Refactored session attribute and flash messages system to their own
-  `SessionBagInterface` implementations.
- * Added `FlashBag`. Flashes expire when retrieved by `get()` or `all()`. This
-   implementation is ESI compatible.
- * Added `AutoExpireFlashBag` (default) to replicate Symfony 2.0.x auto expire
-   behavior of messages auto expiring after one page page load.  Messages must
-   be retrieved by `get()` or `all()`.
- * Added `Symfony\Component\HttpFoundation\Attribute\AttributeBag` to replicate
-   attributes storage behavior from 2.0.x (default).
- * Added `Symfony\Component\HttpFoundation\Attribute\NamespacedAttributeBag` for
-   namespace session attributes.
- * Flash API can stores messages in an array so there may be multiple messages
-   per flash type.  The old `Session` class API remains without BC break as it
-   will allow single messages as before.
- * Added basic session meta-data to the session to record session create time,
-   last updated time, and the lifetime of the session cookie that was provided
-   to the client.
- * Request::getClientIp() method doesn't take a parameter anymore but bases
-   itself on the trustProxy parameter.
- * Added isMethod() to Request object.
- * [BC BREAK] The methods `getPathInfo()`, `getBaseUrl()` and `getBasePath()` of
-   a `Request` now all return a raw value (vs a urldecoded value before). Any call
-   to one of these methods must be checked and wrapped in a `rawurldecode()` if
-   needed.
+ * [BC BREAK] the charset is now configured via the Kernel::getCharset() method
+ * [BC BREAK] the current locale for the user is not stored anymore in the session
+ * added the HTTP method to the profiler storage
+ * updated all listeners to implement EventSubscriberInterface
+ * added TimeDataCollector
+ * added ContainerAwareTraceableEventDispatcher
+ * moved TraceableEventDispatcherInterface to the EventDispatcher component
+ * added RouterListener, LocaleListener, and StreamedResponseListener
+ * added CacheClearerInterface (and ChainCacheClearer)
+ * added a kernel.terminate event (via TerminableInterface and PostResponseEvent)
+ * added a Stopwatch class
+ * added WarmableInterface
+ * improved extensibility between bundles
+ * added profiler storages for Memcache(d), File-based, MongoDB, Redis
+ * moved Filesystem class to its own component
