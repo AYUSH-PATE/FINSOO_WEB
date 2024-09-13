@@ -12,16 +12,9 @@
 namespace Psy\Exception;
 
 /**
- * An interface for Psy Exceptions.
+ * A DeprecatedException for Psy.
  */
-interface Exception
+class DeprecatedException extends RuntimeException
 {
-    /**
-     * This is the only thing, really...
-     *
-     * Return a raw (unformatted) version of the message.
-     *
-     * @return string
-     */
-    public function getRawMessage();
+    // This space intentionally left blank.
 }
