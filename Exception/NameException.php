@@ -14,11 +14,12 @@ declare(strict_types=1);
 
 namespace Ramsey\Uuid\Exception;
 
-use InvalidArgumentException as PhpInvalidArgumentException;
+use RuntimeException as PhpRuntimeException;
 
 /**
- * Thrown to indicate that the argument received is not valid
+ * Thrown to indicate that an error occurred while attempting to hash a
+ * namespace and name
  */
-class InvalidArgumentException extends PhpInvalidArgumentException implements UuidExceptionInterface
+class NameException extends PhpRuntimeException implements UuidExceptionInterface
 {
 }

@@ -12,13 +12,14 @@
 
 declare(strict_types=1);
 
-namespace Ramsey\Uuid\Exception;
-
-use InvalidArgumentException as PhpInvalidArgumentException;
+namespace Ramsey\Uuid\Converter\Number;
 
 /**
- * Thrown to indicate that the argument received is not valid
+ * @deprecated DegradedNumberConverter is no longer necessary for converting
+ *     numbers on 32-bit systems. Transition to {@see GenericNumberConverter}.
+ *
+ * @psalm-immutable
  */
-class InvalidArgumentException extends PhpInvalidArgumentException implements UuidExceptionInterface
+class DegradedNumberConverter extends BigNumberConverter
 {
 }

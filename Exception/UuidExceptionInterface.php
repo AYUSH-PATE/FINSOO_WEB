@@ -14,11 +14,8 @@ declare(strict_types=1);
 
 namespace Ramsey\Uuid\Exception;
 
-use InvalidArgumentException as PhpInvalidArgumentException;
+use Throwable;
 
-/**
- * Thrown to indicate that the argument received is not valid
- */
-class InvalidArgumentException extends PhpInvalidArgumentException implements UuidExceptionInterface
+interface UuidExceptionInterface extends Throwable
 {
 }

@@ -12,13 +12,14 @@
 
 declare(strict_types=1);
 
-namespace Ramsey\Uuid\Exception;
-
-use InvalidArgumentException as PhpInvalidArgumentException;
+namespace Ramsey\Uuid\Converter\Time;
 
 /**
- * Thrown to indicate that the argument received is not valid
+ * @deprecated DegradedTimeConverter is no longer necessary for converting
+ *     time on 32-bit systems. Transition to {@see GenericTimeConverter}.
+ *
+ * @psalm-immutable
  */
-class InvalidArgumentException extends PhpInvalidArgumentException implements UuidExceptionInterface
+class DegradedTimeConverter extends BigNumberTimeConverter
 {
 }

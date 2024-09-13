@@ -14,11 +14,11 @@ declare(strict_types=1);
 
 namespace Ramsey\Uuid\Exception;
 
-use InvalidArgumentException as PhpInvalidArgumentException;
+use RuntimeException as PhpRuntimeException;
 
 /**
- * Thrown to indicate that the argument received is not valid
+ * Thrown to indicate that the source of time encountered an error
  */
-class InvalidArgumentException extends PhpInvalidArgumentException implements UuidExceptionInterface
+class TimeSourceException extends PhpRuntimeException implements UuidExceptionInterface
 {
 }

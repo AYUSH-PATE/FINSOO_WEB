@@ -12,13 +12,17 @@
 
 declare(strict_types=1);
 
-namespace Ramsey\Uuid\Exception;
+namespace Ramsey\Uuid\Provider;
 
-use InvalidArgumentException as PhpInvalidArgumentException;
+use Ramsey\Uuid\Type\Time;
 
 /**
- * Thrown to indicate that the argument received is not valid
+ * A time provider retrieves the current time
  */
-class InvalidArgumentException extends PhpInvalidArgumentException implements UuidExceptionInterface
+interface TimeProviderInterface
 {
+    /**
+     * Returns a time object
+     */
+    public function getTime(): Time;
 }

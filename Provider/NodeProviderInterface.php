@@ -12,13 +12,19 @@
 
 declare(strict_types=1);
 
-namespace Ramsey\Uuid\Exception;
+namespace Ramsey\Uuid\Provider;
 
-use InvalidArgumentException as PhpInvalidArgumentException;
+use Ramsey\Uuid\Type\Hexadecimal;
 
 /**
- * Thrown to indicate that the argument received is not valid
+ * A node provider retrieves or generates a node ID
  */
-class InvalidArgumentException extends PhpInvalidArgumentException implements UuidExceptionInterface
+interface NodeProviderInterface
 {
+    /**
+     * Returns a node ID
+     *
+     * @return Hexadecimal The node ID as a hexadecimal string
+     */
+    public function getNode(): Hexadecimal;
 }

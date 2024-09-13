@@ -14,11 +14,11 @@ declare(strict_types=1);
 
 namespace Ramsey\Uuid\Exception;
 
-use InvalidArgumentException as PhpInvalidArgumentException;
+use RuntimeException as PhpRuntimeException;
 
 /**
- * Thrown to indicate that the argument received is not valid
+ * Thrown to indicate that attempting to fetch or create a node ID encountered an error
  */
-class InvalidArgumentException extends PhpInvalidArgumentException implements UuidExceptionInterface
+class NodeException extends PhpRuntimeException implements UuidExceptionInterface
 {
 }

@@ -12,13 +12,15 @@
 
 declare(strict_types=1);
 
-namespace Ramsey\Uuid\Exception;
+namespace Ramsey\Uuid\Builder;
 
-use InvalidArgumentException as PhpInvalidArgumentException;
+use Ramsey\Uuid\Rfc4122\UuidBuilder as Rfc4122UuidBuilder;
 
 /**
- * Thrown to indicate that the argument received is not valid
+ * @deprecated Transition to {@see Rfc4122UuidBuilder}.
+ *
+ * @psalm-immutable
  */
-class InvalidArgumentException extends PhpInvalidArgumentException implements UuidExceptionInterface
+class DefaultUuidBuilder extends Rfc4122UuidBuilder
 {
 }

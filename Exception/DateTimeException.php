@@ -14,11 +14,11 @@ declare(strict_types=1);
 
 namespace Ramsey\Uuid\Exception;
 
-use InvalidArgumentException as PhpInvalidArgumentException;
+use RuntimeException as PhpRuntimeException;
 
 /**
- * Thrown to indicate that the argument received is not valid
+ * Thrown to indicate that the PHP DateTime extension encountered an exception/error
  */
-class InvalidArgumentException extends PhpInvalidArgumentException implements UuidExceptionInterface
+class DateTimeException extends PhpRuntimeException implements UuidExceptionInterface
 {
 }

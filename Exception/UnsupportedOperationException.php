@@ -14,11 +14,11 @@ declare(strict_types=1);
 
 namespace Ramsey\Uuid\Exception;
 
-use InvalidArgumentException as PhpInvalidArgumentException;
+use LogicException as PhpLogicException;
 
 /**
- * Thrown to indicate that the argument received is not valid
+ * Thrown to indicate that the requested operation is not supported
  */
-class InvalidArgumentException extends PhpInvalidArgumentException implements UuidExceptionInterface
+class UnsupportedOperationException extends PhpLogicException implements UuidExceptionInterface
 {
 }

@@ -14,11 +14,12 @@ declare(strict_types=1);
 
 namespace Ramsey\Uuid\Exception;
 
-use InvalidArgumentException as PhpInvalidArgumentException;
+use RuntimeException as PhpRuntimeException;
 
 /**
- * Thrown to indicate that the argument received is not valid
+ * Thrown to indicate an exception occurred while dealing with DCE Security
+ * (version 2) UUIDs
  */
-class InvalidArgumentException extends PhpInvalidArgumentException implements UuidExceptionInterface
+class DceSecurityException extends PhpRuntimeException implements UuidExceptionInterface
 {
 }
