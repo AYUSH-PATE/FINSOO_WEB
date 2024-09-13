@@ -9,11 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\HttpFoundation\Exception;
+namespace Symfony\Component\HttpFoundation\File\Exception;
 
 /**
- * Base LogicException for Http Foundation component.
+ * Thrown when an error occurred during file upload.
+ *
+ * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class LogicException extends \LogicException implements ExceptionInterface
+class UploadException extends FileException
 {
 }

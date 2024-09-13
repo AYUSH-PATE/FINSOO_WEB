@@ -9,11 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\HttpFoundation\Exception;
+namespace Symfony\Component\HttpFoundation\File;
 
 /**
- * Base LogicException for Http Foundation component.
+ * A PHP stream of unknown size.
+ *
+ * @author Nicolas Grekas <p@tchwork.com>
  */
-class LogicException extends \LogicException implements ExceptionInterface
+class Stream extends File
 {
+    public function getSize(): int|false
+    {
+        return false;
+    }
 }

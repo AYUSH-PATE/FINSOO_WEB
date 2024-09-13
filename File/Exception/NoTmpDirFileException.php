@@ -9,11 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\HttpFoundation\Exception;
+namespace Symfony\Component\HttpFoundation\File\Exception;
 
 /**
- * Base LogicException for Http Foundation component.
+ * Thrown when an UPLOAD_ERR_NO_TMP_DIR error occurred with UploadedFile.
+ *
+ * @author Florent Mata <florentmata@gmail.com>
  */
-class LogicException extends \LogicException implements ExceptionInterface
+class NoTmpDirFileException extends FileException
 {
 }

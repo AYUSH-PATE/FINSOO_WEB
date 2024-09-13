@@ -12,8 +12,8 @@
 namespace Symfony\Component\HttpFoundation\Exception;
 
 /**
- * Base LogicException for Http Foundation component.
+ * Raised when a user sends a malformed request.
  */
-class LogicException extends \LogicException implements ExceptionInterface
+class BadRequestException extends UnexpectedValueException implements RequestExceptionInterface
 {
 }

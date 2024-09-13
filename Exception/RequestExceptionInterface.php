@@ -12,8 +12,10 @@
 namespace Symfony\Component\HttpFoundation\Exception;
 
 /**
- * Base LogicException for Http Foundation component.
+ * Interface for Request exceptions.
+ *
+ * Exceptions implementing this interface should trigger an HTTP 400 response in the application code.
  */
-class LogicException extends \LogicException implements ExceptionInterface
+interface RequestExceptionInterface
 {
 }

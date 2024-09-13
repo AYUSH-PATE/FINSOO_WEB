@@ -12,8 +12,10 @@
 namespace Symfony\Component\HttpFoundation\Exception;
 
 /**
- * Base LogicException for Http Foundation component.
+ * The HTTP request contains headers with conflicting information.
+ *
+ * @author Magnus Nordlander <magnus@fervo.se>
  */
-class LogicException extends \LogicException implements ExceptionInterface
+class ConflictingHeadersException extends UnexpectedValueException implements RequestExceptionInterface
 {
 }

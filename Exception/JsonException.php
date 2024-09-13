@@ -12,8 +12,10 @@
 namespace Symfony\Component\HttpFoundation\Exception;
 
 /**
- * Base LogicException for Http Foundation component.
+ * Thrown by Request::toArray() when the content cannot be JSON-decoded.
+ *
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class LogicException extends \LogicException implements ExceptionInterface
+final class JsonException extends UnexpectedValueException implements RequestExceptionInterface
 {
 }

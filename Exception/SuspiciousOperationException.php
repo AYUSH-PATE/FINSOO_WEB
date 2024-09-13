@@ -12,8 +12,9 @@
 namespace Symfony\Component\HttpFoundation\Exception;
 
 /**
- * Base LogicException for Http Foundation component.
+ * Raised when a user has performed an operation that should be considered
+ * suspicious from a security perspective.
  */
-class LogicException extends \LogicException implements ExceptionInterface
+class SuspiciousOperationException extends UnexpectedValueException implements RequestExceptionInterface
 {
 }

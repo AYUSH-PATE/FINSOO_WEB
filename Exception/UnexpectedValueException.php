@@ -11,9 +11,6 @@
 
 namespace Symfony\Component\HttpFoundation\Exception;
 
-/**
- * Base LogicException for Http Foundation component.
- */
-class LogicException extends \LogicException implements ExceptionInterface
+class UnexpectedValueException extends \UnexpectedValueException
 {
 }

@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\HttpFoundation\Exception;
+namespace Symfony\Component\HttpFoundation\Session;
 
 /**
- * Base LogicException for Http Foundation component.
+ * @author Kevin Bond <kevinbond@gmail.com>
  */
-class LogicException extends \LogicException implements ExceptionInterface
+interface SessionFactoryInterface
 {
+    public function createSession(): SessionInterface;
 }
