@@ -9,6 +9,12 @@
  */
 namespace SebastianBergmann\CodeCoverage;
 
-final class InvalidArgumentException extends \InvalidArgumentException implements Exception
+use RuntimeException;
+
+final class TestIdMissingException extends RuntimeException implements Exception
 {
+    public function __construct()
+    {
+        parent::__construct('Test ID is missing');
+    }
 }

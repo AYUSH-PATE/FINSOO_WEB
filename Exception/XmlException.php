@@ -9,6 +9,8 @@
  */
 namespace SebastianBergmann\CodeCoverage;
 
-final class InvalidArgumentException extends \InvalidArgumentException implements Exception
+use RuntimeException;
+
+final class XmlException extends RuntimeException implements Exception
 {
 }

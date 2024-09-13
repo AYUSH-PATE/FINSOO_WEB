@@ -9,6 +9,12 @@
  */
 namespace SebastianBergmann\CodeCoverage;
 
-final class InvalidArgumentException extends \InvalidArgumentException implements Exception
+use RuntimeException;
+
+final class ReportAlreadyFinalizedException extends RuntimeException implements Exception
 {
+    public function __construct()
+    {
+        parent::__construct('The code coverage report has already been finalized');
+    }
 }
